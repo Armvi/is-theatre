@@ -1,0 +1,30 @@
+-user
+sign in 
+sing up
+sign out
+---admin
+add employee
+add employee role
+add employee information in order of his role
+ add desription for actors
+add performance in repertoir (repertoir will automaticly added in db(its just period of time))
+ composition
+  personages
+   desription of personage
+  author
+ date
+ time
+add degree to employee
+
+---user
+check current repertoir performances
+order ticket
+ season
+ simple
+check performance ifno
+ check actors
+ check stuff
+
+course-work queries¯\_(ツ)_/¯
+
+-system 
