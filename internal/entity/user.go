@@ -1,16 +1,16 @@
-package entities
+package entity
 
 const UserTableName = "User"
 
 type User struct {
-	ID          int64  `db:"id"`
-	NickName    string `db:"first_name"`
-	Email       string `db:"email"`
-	Password    string `db:"password"`
-	PhoneNumber string `db:"phone_number"`
-	Role        Role   `db:"role"`
-	Verified    bool   `db:"verified"`
-	EmailCode   int32  `db:"email_code"`
+	Id          int64  `json:"id,omitempty"`
+	NickName    string `json:"nick_name,omitempty"`
+	Email       string `json:"email,omitempty"`
+	Password    string `json:"password,omitempty"`
+	PhoneNumber string `json:"phone_number,omitempty"`
+	Role        Role   `json:"role,omitempty"`
+	Verified    bool   `json:"verified,omitempty"`
+	EmailCode   int32  `json:"email_code,omitempty"`
 }
 
 type Role string

@@ -1,10 +1,7 @@
-package entities
-
-const ActorsRoleTableName = "ActorsRole"
+package entity
 
 type ActorsRole struct {
-	Id            int64
-	PerformanceId int64
-	ActorId       int64
-	PersonageId   int64
+	Id        int64      `json:"id,omitempty"`
+	Actor     *Actor     `json:"actor,omitempty"`
+	Personage *Personage `json:"personage,omitempty"`
 }

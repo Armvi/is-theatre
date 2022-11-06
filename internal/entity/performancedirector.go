@@ -1,8 +1,6 @@
-package entities
-
-const PerformanceDirectorTableName = "PerformanceDirector"
+package entity
 
 type PerformanceDirector struct {
-	Id       int64
-	WorkerId int64
+	Id     int64   `json:"id,omitempty"`
+	Worker *Worker `json:"worker,omitempty"`
 }

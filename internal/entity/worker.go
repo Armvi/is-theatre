@@ -1,19 +1,9 @@
-package entities
-
-import (
-	"time"
-)
-
-const WorkerTableName = "Worker"
+package entity
 
 type Worker struct {
-	Id         int64
-	Name       string
-	SecondName string
-	BirthDate  time.Time
-	Salary     float64
-}
-
-func g() {
-
+	Id         int64   `json:"id,omitempty"`
+	Name       string  `json:"name,omitempty"`
+	SecondName string  `json:"second_name,omitempty"`
+	BirthDate  Date    `json:"birth_date"`
+	Salary     float64 `json:"salary,omitempty"`
 }

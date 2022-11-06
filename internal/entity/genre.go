@@ -1,8 +1,6 @@
-package entities
-
-const GenreTableName = "Genre"
+package entity
 
 type Genre struct {
-	Id        int64
-	GenreName string
+	Id        int64  `json:"id,omitempty"`
+	GenreName string `json:"genre_name,omitempty"`
 }

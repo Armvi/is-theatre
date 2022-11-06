@@ -1,11 +1,10 @@
-package entities
-
-const PerformanceTableName = "Performance"
+package entity
 
 type Performance struct {
-	Id                    int64
-	PerformanceName       string
-	CompositionId         int64
-	PerformanceDirectorId int64
-	Description           string
+	Id                  int64                `json:"id,omitempty"`
+	PerformanceName     string               `json:"performance_name,omitempty"`
+	Composition         *Composition         `json:"composition,omitempty"`
+	PerformanceDirector *PerformanceDirector `json:"performance_director,omitempty"`
+	Description         string               `json:"description,omitempty"`
+	ActorsRoles         []ActorsRole         `json:"actors_roles"`
 }

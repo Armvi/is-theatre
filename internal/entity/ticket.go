@@ -1,9 +1,8 @@
-package entities
-
-const TicketTableName = "Ticket"
+package entity
 
 type Ticket struct {
-	PerformanceSetId int64
-	PlaceNumber      int64
-	Cost             float64
+	PerformanceId int64   `json:"performance,omitempty"`
+	PlaceNumber   int64   `json:"place_number,omitempty"`
+	Cost          float64 `json:"cost,omitempty"`
+	UserId        int64   `json:"user_id"`
 }

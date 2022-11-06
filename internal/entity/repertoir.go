@@ -1,11 +1,8 @@
-package entities
-
-import "time"
-
-const RepertoireTableName = "Repertoire"
+package entity
 
 type Repertoire struct {
-	Id        int64
-	BeginDate time.Time
-	EndDate   time.Time
+	Id           int64         `json:"id,omitempty"`
+	BeginDate    Date          `json:"begin_date"`
+	EndDate      Date          `json:"end_date"`
+	Performances []Performance `json:"performances"`
 }
