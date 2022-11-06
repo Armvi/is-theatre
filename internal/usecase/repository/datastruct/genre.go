@@ -1,4 +1,4 @@
-package datastruct
+package entity
 
 const GenreTableName = "Genre"
 

@@ -1,4 +1,4 @@
-package datastruct
+package entity
 
 const PerformanceTableName = "Performance"
 
@@ -7,4 +7,5 @@ type Performance struct {
 	PerformanceName       string
 	CompositionId         int64
 	PerformanceDirectorId int64
+	Description           string
 }

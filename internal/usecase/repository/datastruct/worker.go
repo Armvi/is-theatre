@@ -1,6 +1,8 @@
-package datastruct
+package entity
 
-import "time"
+import (
+	"time"
+)
 
 const WorkerTableName = "Worker"
 
@@ -10,4 +12,8 @@ type Worker struct {
 	SecondName string
 	BirthDate  time.Time
 	Salary     float64
+}
+
+func g() {
+
 }

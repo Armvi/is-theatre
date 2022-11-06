@@ -1,4 +1,4 @@
-package datastruct
+package entities
 
 const ActorTableName = "Actor"
 
