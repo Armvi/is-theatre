@@ -5,5 +5,5 @@ type Author struct {
 	Name       string `json:"name,omitempty"`
 	SecondName string `json:"second_name,omitempty"`
 	Country    string `json:"country,omitempty"`
-	Century    string `json:"century,omitempty"`
+	Century    int    `json:"century,omitempty"`
 }
