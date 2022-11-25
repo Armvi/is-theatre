@@ -1,4 +1,4 @@
-package entity
+package datastruct
 
 const AuthorTableName = "Author"
 
@@ -7,5 +7,5 @@ type Author struct {
 	Name       string
 	SecondName string
 	Country    string
-	Century    string
+	Century    int
 }

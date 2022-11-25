@@ -1,9 +1,10 @@
-package entity
+package datastruct
 
 const ActorTableName = "Actor"
 
 type Actor struct {
-	Id         int64
-	WorkerId   int64
-	Experience int
+	Id            int64
+	WorkerId      int64
+	Experience    int
+	DescriptionId int64
 }

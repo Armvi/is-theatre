@@ -1,4 +1,4 @@
-package entity
+package datastruct
 
 import "time"
 

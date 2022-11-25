@@ -1,4 +1,4 @@
-package entity
+package datastruct
 
 const PersonageDescriptionTableName = "PersonageDescription"
 
