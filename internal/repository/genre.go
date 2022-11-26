@@ -9,6 +9,7 @@ import (
 type GenreQuery interface {
 	AddGenre(genre datastruct.Genre) (*int64, error)
 	GetGenre(id int64) (*datastruct.Genre, error)
+	Genres() ([]datastruct.Genre, error)
 	DeleteGenre(id int64) error
 }
 
@@ -42,6 +43,28 @@ func (a *genreQuery) GetGenre(id int64) (*datastruct.Genre, error) {
 	}
 
 	return &g, nil
+}
+
+func (a *genreQuery) Genres() ([]datastruct.Genre, error) {
+	db := dbQueryBuilder().
+		Select("genre", "id").
+		From(datastruct.GenreTableName)
+
+	var genres []datastruct.Genre
+	var g datastruct.Genre
+	rows, err := db.Query()
+	if err != nil {
+		return nil, fmt.Errorf("get genres error: %w", err)
+	}
+	for rows.Next() {
+		err = rows.Scan(&g.GenreName, &g.Id)
+		if err != nil {
+			return nil, fmt.Errorf("get genres error: %w", err)
+		}
+		genres = append(genres, g)
+	}
+
+	return genres, nil
 }
 
 func (a *genreQuery) DeleteGenre(id int64) error {

@@ -127,7 +127,10 @@ func (p *personageQuery) PersonagesByComposition(compositionId int64) ([]datastr
 		return nil, fmt.Errorf("get personages by composition error: %w", err)
 	}
 	for rows.Next() {
-		err = rows.Scan(&personage.Name, &personage.DescriptionId, &personage.CompositionId, &personage.Id)
+		err = rows.Scan(&personage.Name,
+			&personage.DescriptionId,
+			&personage.CompositionId,
+			&personage.Id)
 		if err != nil {
 			return nil, fmt.Errorf("get persoanges by composition error: %w", err)
 		}

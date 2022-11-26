@@ -8,6 +8,7 @@ import (
 
 type UserQuery interface {
 	GetUser(id int64) (*datastruct.User, error)
+	GetUsers(limit, offset uint64) ([]datastruct.User, error)
 	CreateUser(user datastruct.User) (*int64, error)
 	UpdateUser(person *datastruct.User) (*datastruct.User, error)
 	DeleteUser(userID int64) error
@@ -51,6 +52,42 @@ func (u *userQuery) GetUser(id int64) (*datastruct.User, error) {
 	}
 
 	return &us, nil
+}
+
+func (u *userQuery) GetUsers(limit, offset uint64) ([]datastruct.User, error) {
+	db := dbQueryBuilder().
+		Select("nickName",
+			"email",
+			"password",
+			"role",
+			"verified",
+			"emailCode",
+			"id").
+		From(datastruct.UserTableName).
+		Limit(limit).Offset(offset)
+
+	var users []datastruct.User
+	var user datastruct.User
+	rows, err := db.Query()
+	if err != nil {
+		return nil, fmt.Errorf("get users error: %w", err)
+	}
+
+	for rows.Next() {
+		err = rows.Scan(&user.NickName,
+			&user.Email,
+			&user.Password,
+			&user.Role,
+			&user.Verified,
+			&user.EmailCode,
+			&user.ID)
+		if err != nil {
+			return nil, fmt.Errorf("get users error: %w", err)
+		}
+		users = append(users, user)
+	}
+
+	return users, nil
 }
 
 func (u *userQuery) DeleteUser(userID int64) error {

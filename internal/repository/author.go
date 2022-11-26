@@ -14,6 +14,7 @@ type AuthorQuery interface {
 	GetAuthors(limit, offset uint64) ([]datastruct.Author, error)
 	GetAuthorsByCentury(beg, end int) ([]datastruct.Author, error)
 	GetAuthorsByCountry(country string) ([]datastruct.Author, error)
+	GetAuthorsByConditions(country *string, century *int) ([]datastruct.Author, error)
 }
 
 type authorQuery struct{}
@@ -36,12 +37,21 @@ func (a authorQuery) CreateAuthor(author datastruct.Author) (*int64, error) {
 
 func (a authorQuery) GetAuthor(id int64) (*datastruct.Author, error) {
 	db := dbQueryBuilder().
-		Select("name", "secondName", "country", "century", "id").
+		Select("name",
+			"secondName",
+			"country",
+			"century",
+			"id").
 		From(datastruct.AuthorTableName).
 		Where(squirrel.Eq{"id": id})
 
 	au := datastruct.Author{}
-	err := db.QueryRow().Scan(&au.Name, &au.SecondName, &au.Country, &au.Century, &au.Id)
+	err := db.QueryRow().
+		Scan(&au.Name,
+			&au.SecondName,
+			&au.Country,
+			&au.Century,
+			&au.Id)
 	if err != nil {
 		return nil, fmt.Errorf("get author: %w", err)
 	}
@@ -57,7 +67,7 @@ func (a authorQuery) UpdateAuthor(author *datastruct.Author) (*datastruct.Author
 	}
 
 	updated := updateAuthor(fromDB, author)
-	
+
 	db := dbQueryBuilder().
 		Update(datastruct.UserTableName).
 		SetMap(map[string]interface{}{
@@ -142,6 +152,39 @@ func (a authorQuery) GetAuthorsByCentury(beg, end int) ([]datastruct.Author, err
 }
 
 func (a authorQuery) GetAuthorsByCountry(country string) ([]datastruct.Author, error) {
+	db := dbQueryBuilder().
+		Select("name", "secondName", "country", "century", "id").
+		From(datastruct.AuthorTableName).
+		Where(squirrel.Eq{"country": country})
+
+	var authors []datastruct.Author
+	var au datastruct.Author
+	rows, err := db.Query()
+	if err != nil {
+		return nil, fmt.Errorf("get authors by country error: %w", err)
+	}
+
+	for rows.Next() {
+		err = rows.Scan(&au.Name, &au.SecondName, &au.Country, &au.Century, &au.Id)
+		if err != nil {
+			return nil, fmt.Errorf("get authors by country error: %w", err)
+		}
+		authors = append(authors, au)
+	}
+
+	return authors, nil
+}
+
+func (a authorQuery) GetAuthorsByConditions(country *string, century *int) ([]datastruct.Author, error) {
+	var conditions squirrel.And
+	if country != nil {
+		conditions = append(conditions, squirrel.Eq{"country": *country})
+	}
+
+	if century != nil {
+		conditions = append(conditions, squirrel.Eq{"century": *century})
+	}
+
 	db := dbQueryBuilder().
 		Select("name", "secondName", "country", "century", "id").
 		From(datastruct.AuthorTableName).
