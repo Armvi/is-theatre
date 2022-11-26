@@ -3,10 +3,10 @@ package datastruct
 const ActorDescriptionTableName = "ActorDescription"
 
 type ActorDescription struct {
-	Id      int64
-	ActorId int64
-	Age     string
-	Height  string
-	Weight  string
-	Voice   string
+	Id     int64
+	Age    string
+	Voice  string
+	Height string
+	Weight string
+	Gender bool
 }

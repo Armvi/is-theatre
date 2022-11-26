@@ -1,11 +1,15 @@
 package datastruct
 
+import "time"
+
 const PerformanceTableName = "Performance"
 
 type Performance struct {
-	Id                    int64
-	PerformanceName       string
-	CompositionId         int64
-	PerformanceDirectorId int64
-	Description           string
+	Id              int64
+	CompositionId   int64
+	PerformanceName string
+	Description     string
+	DirectorId      int64
+	Date            time.Time
+	Time            time.Time
 }
